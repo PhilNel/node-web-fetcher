@@ -1,0 +1,15 @@
+{
+  "name": "web-fetcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fetch": "node src/fetch-rendered.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.51.1"
+  }
+}
