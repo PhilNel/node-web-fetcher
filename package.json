@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch": "node src/fetch-rendered.js"
+    "fetch": "node src/main.js"
   },
   "keywords": [],
   "author": "",
