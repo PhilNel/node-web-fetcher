@@ -2,13 +2,13 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const PlaywrightFetcher = require('./fetcher/PlaywrightFetcher');
+const { createFetcherFromEnv } = require("./fetcher/FetcherFactory");
 const StaticUrlProvider = require('./provider/StaticUrlProvider');
 const { createWriterFromEnv } = require('./writer/WriterFactory');
 
 async function fetchAndWrite() {
     const provider = new StaticUrlProvider();
-    const fetcher = new PlaywrightFetcher();
+    const fetcher = new createFetcherFromEnv();
     const writer = createWriterFromEnv();
 
     const url = provider.getUrl();
