@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const { createFetcherFromEnv } = require("./fetcher/FetcherFactory");
+const { createFetcherFromEnv } = require('./fetcher/FetcherFactory');
 const StaticUrlProvider = require('./provider/StaticUrlProvider');
 const { createWriterFromEnv } = require('./writer/WriterFactory');
 
@@ -19,7 +19,7 @@ async function fetchAndWrite() {
 }
 
 module.exports = {
-    handler: async (event, context) => {
+    handler: async (_event, _context) => {
         try {
             await fetchAndWrite();
             return {
