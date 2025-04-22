@@ -1,6 +1,8 @@
 # node-web-fetcher
 
-A modular and headless page renderer built in Node.js using Playwright. It’s designed to render pages using JavaScript and store the full HTML for further parsing.
+A Node.js utility that renders JavaScript-heavy web pages (like DuckDuckGo’s careers page) and stores the resulting HTML for downstream scraping.g.
+
+Designed to run both locally and in AWS Lambda using puppeteer-core and @sparticuz/chromium.
 
 This component pairs with [perl-web-scraper](https://github.com/PhilNel/perl-web-scraper).
 
@@ -25,6 +27,22 @@ This will:
 - Fetch the full page that it will render.
 - Save the result to file as rendered.html
 
+## 📦 Packaging
+To prepare the Lambda zip file:
+
+```bash
+make package
+```
+
+This will:
+- Install production-only dependencies
+- Copy all required files into dist/
+- Create a zip file that can be uploaded to S3
+
 ## 🔧 Dependencies
-- playwright – for full page rendering
-- Node 18+ (for native ES modules and async/await support)
+Runtime:
+- `puppeteer-core` – headless browser rendering
+- `@sparticuz/chromium` – Lambda-compatible Chromium binary
+
+Dev only:
+- `dotenv` – loads local environment variables
