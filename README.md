@@ -46,3 +46,4 @@ Runtime:
 
 Dev only:
 - `dotenv` – loads local environment variables
+- `eslint` - for linting the project source code
