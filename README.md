@@ -6,6 +6,8 @@ Designed to run both locally and in AWS Lambda using puppeteer-core and @spartic
 
 This component pairs with [perl-web-scraper](https://github.com/PhilNel/perl-web-scraper).
 
+📚 **Documentation:** [https://philnel.github.io/docs-web-scraper](https://philnel.github.io/docs-web-scraper)
+
 ## 🛠 Installation
 
 Dependencies are managed using npm and can be installed as follows:
