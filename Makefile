@@ -1,7 +1,7 @@
 .PHONY: install package lint upload deploy
 
 BUCKET_NAME := web-scraper-artefacts-dev-af-south-1
-LAMBDA_NAME := fetcher_lambda
+LAMBDA_NAME := node-fetcher-lambda
 DIST_DIR := dist
 ZIP_FILE := $(LAMBDA_NAME).zip
 
