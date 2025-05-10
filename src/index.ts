@@ -1,14 +1,15 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+import { config as loadDotenv } from 'dotenv';
+import { createFetcherFromEnv } from './fetcher/FetcherFactory';
+import StaticUrlProvider from './provider/StaticUrlProvider';
+import { createWriterFromEnv } from './writer/WriterFactory';
 
-const { createFetcherFromEnv } = require('./fetcher/FetcherFactory');
-const StaticUrlProvider = require('./provider/StaticUrlProvider');
-const { createWriterFromEnv } = require('./writer/WriterFactory');
+if (process.env.NODE_ENV !== 'production') {
+  loadDotenv();
+}
 
 async function fetchAndWrite() {
     const provider = new StaticUrlProvider();
-    const fetcher = new createFetcherFromEnv();
+    const fetcher = createFetcherFromEnv();
     const writer = createWriterFromEnv();
 
     const url = provider.getUrl();
@@ -19,14 +20,14 @@ async function fetchAndWrite() {
 }
 
 module.exports = {
-    handler: async (_event, _context) => {
+    handler: async (_event: any, _context: any) => {
         try {
             await fetchAndWrite();
             return {
                 statusCode: 200,
                 body: JSON.stringify({ success: true }),
             };
-        } catch (err) {
+        } catch (err: any) {
             console.error('[ERROR]', err);
             return {
                 statusCode: 500,
