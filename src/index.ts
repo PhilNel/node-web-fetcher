@@ -1,13 +1,14 @@
+import { APIGatewayProxyEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
 import { config as loadDotenv } from 'dotenv';
 import { createFetcherFromEnv } from './fetcher/FetcherFactory';
 import StaticUrlProvider from './provider/StaticUrlProvider';
 import { createWriterFromEnv } from './writer/WriterFactory';
 
 if (process.env.NODE_ENV !== 'production') {
-  loadDotenv();
+    loadDotenv();
 }
 
-async function fetchAndWrite() {
+async function fetchAndWrite(): Promise<void> {
     const provider = new StaticUrlProvider();
     const fetcher = createFetcherFromEnv();
     const writer = createWriterFromEnv();
@@ -19,22 +20,24 @@ async function fetchAndWrite() {
     await writer.write(html);
 }
 
-module.exports = {
-    handler: async (_event: any, _context: any) => {
-        try {
-            await fetchAndWrite();
-            return {
-                statusCode: 200,
-                body: JSON.stringify({ success: true }),
-            };
-        } catch (err: any) {
-            console.error('[ERROR]', err);
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: err.message }),
-            };
-        }
-    },
+export const handler = async (
+    _event: APIGatewayProxyEvent,
+    _context: Context
+): Promise<APIGatewayProxyResult> => {
+    try {
+        await fetchAndWrite();
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ success: true }),
+        };
+    } catch (err: any) {
+        console.error('[ERROR]', err);
+        const message = err instanceof Error ? err.message : 'An unknown error occurred';
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: message }),
+        };
+    }
 };
 
 // Allow direct CLI execution
