@@ -1,4 +1,7 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { createLogger } from '../logger/Logger';
+
+const log = createLogger('S3Writer');
 
 export class S3Writer {
 
@@ -24,6 +27,6 @@ export class S3Writer {
         });
 
         await this.s3.send(command);
-        console.log(`[INFO] Uploaded HTML to s3://${this.bucketName}/${this.key}`);
+        log.info(`Uploaded HTML to s3://${this.bucketName}/${this.key}`);
     }
 }

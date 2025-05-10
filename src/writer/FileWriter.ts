@@ -1,4 +1,7 @@
 import { promises as fs } from 'fs';
+import { createLogger } from '../logger/Logger';
+
+const log = createLogger('FileWriter');
 
 export class FileWriter {
     private filePath: string;
@@ -9,6 +12,6 @@ export class FileWriter {
 
     async write(html: string): Promise<void> {
         await fs.writeFile(this.filePath, html);
-        console.log(`[INFO] HTML written to ${this.filePath}`);
+        log.info(`HTML written to ${this.filePath}`);
     }
 }

@@ -2,6 +2,9 @@ import { createFetcherFromEnv } from '../fetcher/FetcherFactory';
 import StaticUrlProvider from '../provider/StaticUrlProvider';
 import { createWriterFromEnv } from '../writer/WriterFactory';
 import { loadConfig } from '../config';
+import { createLogger } from '../logger/Logger';
+
+const log = createLogger('Handler');
 
 export async function fetchAndWrite(): Promise<void> {
   const config = loadConfig();
@@ -10,7 +13,7 @@ export async function fetchAndWrite(): Promise<void> {
   const writer = createWriterFromEnv(config.writerType);
 
   const url = provider.getUrl();
-  console.log(`[INFO] Fetching: ${url}`);
+  log.info(`Fetching: ${url}`);
 
   const html = await fetcher.fetchPage(url);
   await writer.write(html);

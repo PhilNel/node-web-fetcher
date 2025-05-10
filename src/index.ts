@@ -1,6 +1,9 @@
 import { APIGatewayProxyEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
 import { fetchAndWrite } from './handler/fetchAndWrite';
 import { isLambdaRuntime } from './runtime/isLambda';
+import { createLogger } from './logger/Logger';
+
+const log = createLogger('Index');
 
 export const handler = async (
     _event: APIGatewayProxyEvent,
@@ -12,8 +15,8 @@ export const handler = async (
             statusCode: 200,
             body: JSON.stringify({ success: true }),
         };
-    } catch (err: any) {
-        console.error('[ERROR]', err);
+    } catch (err) {
+        log.error(err);
         const message = err instanceof Error ? err.message : 'An unknown error occurred';
         return {
             statusCode: 500,
@@ -26,7 +29,7 @@ async function runLocal(): Promise<void> {
     const { config: loadDotenv } = await import('dotenv');
     loadDotenv();
     fetchAndWrite().catch(err => {
-        console.error('[FATAL]', err);
+        log.error(err);
         process.exit(1);
     });
 }
