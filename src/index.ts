@@ -1,24 +1,6 @@
 import { APIGatewayProxyEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
-import { config as loadDotenv } from 'dotenv';
-import { createFetcherFromEnv } from './fetcher/FetcherFactory';
-import StaticUrlProvider from './provider/StaticUrlProvider';
-import { createWriterFromEnv } from './writer/WriterFactory';
-
-if (process.env.NODE_ENV !== 'production') {
-    loadDotenv();
-}
-
-async function fetchAndWrite(): Promise<void> {
-    const provider = new StaticUrlProvider();
-    const fetcher = createFetcherFromEnv();
-    const writer = createWriterFromEnv();
-
-    const url = provider.getUrl();
-    console.log(`[INFO] Fetching: ${url}`);
-
-    const html = await fetcher.fetchPage(url);
-    await writer.write(html);
-}
+import { fetchAndWrite } from './handler/fetchAndWrite';
+import { isLambdaRuntime } from './runtime/isLambda';
 
 export const handler = async (
     _event: APIGatewayProxyEvent,
@@ -40,10 +22,16 @@ export const handler = async (
     }
 };
 
-// Allow direct CLI execution
-if (require.main === module) {
+async function runLocal(): Promise<void> {
+    const { config: loadDotenv } = await import('dotenv');
+    loadDotenv();
     fetchAndWrite().catch(err => {
         console.error('[FATAL]', err);
         process.exit(1);
     });
+}
+
+// Allow direct CLI execution
+if (!isLambdaRuntime() && require.main === module) {
+    runLocal();
 }

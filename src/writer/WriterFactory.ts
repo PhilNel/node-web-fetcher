@@ -6,9 +6,7 @@ export interface Writer {
     write(html: string): Promise<void>;
 }
 
-export function createWriterFromEnv(): Writer {
-    const writerType = process.env.WRITER_TYPE || 'file';
-
+export function createWriterFromEnv(writerType: string): Writer {
     if (writerType === 's3') {
         const bucketName = process.env.WRITER_S3_BUCKET_NAME;
         if (!bucketName) {

@@ -10,6 +10,7 @@ install:
 
 package:
 	rm -rf $(DIST_DIR)
+	mkdir dist
 	npx tsc
 	cp -r src package.json package-lock.json $(DIST_DIR)
 	cd $(DIST_DIR) && npm ci --omit=dev

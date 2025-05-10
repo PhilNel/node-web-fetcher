@@ -1,12 +1,10 @@
 import { ChromiumFetcher } from './ChromiumFetcher';
 
 export interface Fetcher {
-  fetchPage(url: string): Promise<string>;
+    fetchPage(url: string): Promise<string>;
 }
 
-export function createFetcherFromEnv() {
-    const fetcherType = process.env.FETCHER_TYPE || 'chromium';
-
+export function createFetcherFromEnv(fetcherType: string) {
     switch (fetcherType) {
         case 'chromium':
             return new ChromiumFetcher();
