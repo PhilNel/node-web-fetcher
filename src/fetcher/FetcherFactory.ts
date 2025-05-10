@@ -1,4 +1,4 @@
-import { ChromiumFetcher } from './ChromiumFetcher';
+import { ChromiumFetcher } from './ChromiumFetcher.js';
 
 export interface Fetcher {
     fetchPage(url: string): Promise<string>;

@@ -1,6 +1,6 @@
 import path from 'path';
-import { FileWriter } from './FileWriter';
-import { S3Writer } from './S3Writer';
+import { FileWriter } from './FileWriter.js';
+import { S3Writer } from './S3Writer.js';
 
 export interface Writer {
     write(html: string): Promise<void>;

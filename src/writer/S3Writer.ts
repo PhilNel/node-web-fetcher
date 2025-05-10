@@ -1,5 +1,5 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { createLogger } from '../logger/Logger';
+import { createLogger } from '../logger/Logger.js';
 
 const log = createLogger('S3Writer');
 

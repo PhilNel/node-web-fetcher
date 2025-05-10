@@ -1,4 +1,4 @@
-import pino from 'pino';
+import { pino } from 'pino';
 
 const level = process.env.LOG_LEVEL || 'info';
 
@@ -8,7 +8,7 @@ export function createLogger(component: string) {
         timestamp: pino.stdTimeFunctions.isoTime,
         formatters: {
             bindings: () => ({}), // remove default pid/hostname
-            log: (obj) => ({ component, ...obj }),
+            log: (obj: Record<string, unknown>) => ({ component, ...obj })
         },
     });
 }

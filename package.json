@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch": "ts-node src/index.ts | npx pino-pretty",
+    "fetch": "node --loader ts-node/esm src/index.ts | npx pino-pretty",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "engines": {
     "node": ">=20"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",

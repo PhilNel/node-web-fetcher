@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { createLogger } from '../logger/Logger';
+import { createLogger } from '../logger/Logger.js';
 
 const log = createLogger('FileWriter');
 
