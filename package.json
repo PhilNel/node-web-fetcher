@@ -4,22 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch": "node src/index.js",
+    "fetch": "node --loader ts-node/esm src/index.ts | npx pino-pretty",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.787.0",
     "@sparticuz/chromium": "^133.0.0",
+    "pino": "^9.6.0",
     "puppeteer-core": "^24.6.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.1",
+    "@types/aws-lambda": "^8.10.149",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^22.15.17",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^7.0.2",
+    "@typescript-eslint/parser": "^8.32.0",
     "dotenv": "^16.5.0",
-    "eslint": "^9.25.1",
-    "globals": "^16.0.0"
+    "eslint": "^8.57.1",
+    "globals": "^16.0.0",
+    "pino-pretty": "^13.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

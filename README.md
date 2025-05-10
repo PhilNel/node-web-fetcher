@@ -10,6 +10,17 @@ This component pairs with [perl-web-scraper](https://github.com/PhilNel/perl-web
 
 ## 🛠 Installation
 
+This project aims to stay aligned with the latest Node.js LTS (Long-Term Support) release.
+
+It is recommended to use [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) to manage your Node.js versions. Once installed, you can install and use the appropriate version with:
+
+```bash
+nvm install --lts
+nvm use --lts
+```
+
+Current LTS version used: Node.js 22.x
+
 Dependencies are managed using npm and can be installed as follows:
 
 ```bash
