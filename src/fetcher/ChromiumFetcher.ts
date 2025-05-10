@@ -1,8 +1,8 @@
-const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 
-class ChromiumFetcher {
-    async fetchPage(url) {
+export class ChromiumFetcher {
+    async fetchPage(url: string): Promise<string> {
         const browser = await puppeteer.launch({
             args: chromium.args,
             defaultViewport: chromium.defaultViewport,
@@ -19,5 +19,3 @@ class ChromiumFetcher {
         return html;
     }
 }
-
-module.exports = ChromiumFetcher;

@@ -1,7 +1,12 @@
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-class S3Writer {
-    constructor(bucketName, key = 'rendered.html') {
+export class S3Writer {
+
+    private s3: S3Client;
+    private bucketName: string;
+    private key: string;
+
+    constructor(bucketName: string, key: string = 'rendered.html') {
         this.bucketName = bucketName;
         this.key = key;
 
@@ -10,7 +15,7 @@ class S3Writer {
         });
     }
 
-    async write(html) {
+    async write(html: string): Promise<void> {
         const command = new PutObjectCommand({
             Bucket: this.bucketName,
             Key: this.key,
@@ -22,5 +27,3 @@ class S3Writer {
         console.log(`[INFO] Uploaded HTML to s3://${this.bucketName}/${this.key}`);
     }
 }
-
-module.exports = S3Writer;

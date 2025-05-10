@@ -1,6 +1,10 @@
-const ChromiumFetcher = require('./ChromiumFetcher');
+import { ChromiumFetcher } from './ChromiumFetcher';
 
-function createFetcherFromEnv() {
+export interface Fetcher {
+  fetchPage(url: string): Promise<string>;
+}
+
+export function createFetcherFromEnv() {
     const fetcherType = process.env.FETCHER_TYPE || 'chromium';
 
     switch (fetcherType) {
@@ -11,5 +15,3 @@ function createFetcherFromEnv() {
             throw new Error(`Unknown fetcher type: ${fetcherType}`);
     }
 }
-
-module.exports = { createFetcherFromEnv };

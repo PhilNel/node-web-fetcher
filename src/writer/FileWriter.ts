@@ -1,15 +1,14 @@
-const fs = require('fs').promises;
+import { promises as fs } from 'fs';
 
-class FileWriter {
+export class FileWriter {
+    private filePath: string;
 
     constructor(filePath = 'rendered.html') {
         this.filePath = filePath;
     }
 
-    async write(html) {
+    async write(html: string): Promise<void> {
         await fs.writeFile(this.filePath, html);
         console.log(`[INFO] HTML written to ${this.filePath}`);
     }
 }
-
-module.exports = FileWriter;

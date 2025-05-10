@@ -1,9 +1,12 @@
-const path = require('path');
+import path from 'path';
+import { FileWriter } from './FileWriter';
+import { S3Writer } from './S3Writer';
 
-const FileWriter = require('./FileWriter');
-const S3Writer = require('./S3Writer');
+export interface Writer {
+    write(html: string): Promise<void>;
+}
 
-function createWriterFromEnv() {
+export function createWriterFromEnv(): Writer {
     const writerType = process.env.WRITER_TYPE || 'file';
 
     if (writerType === 's3') {
@@ -19,5 +22,3 @@ function createWriterFromEnv() {
     const outputPath = process.env.OUTPUT_PATH || path.resolve(__dirname, '../../rendered.html');
     return new FileWriter(outputPath);
 }
-
-module.exports = { createWriterFromEnv };
